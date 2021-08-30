@@ -184,10 +184,12 @@ class LCD():
             if overflow == 'scroll':
                 self.new_text_scroll(string, line)
                 self.display_text_scroll(string)
+                return True
             elif overflow == 'rotate':
                 self.display_rotating_text(string, line)
             else:
                 print('The following string was not displayed: ', string)
+        return False
 
     def display_rotating_text(self, string, line=1, rate=0.5):
         # Double space notes end of rotation and increases readability
