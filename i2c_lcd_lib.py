@@ -191,14 +191,16 @@ class LCD():
                 print('The following string was not displayed: ', string)
         return False
 
-    def display_rotating_text(self, string, line=1, rate=0.5):
+    def display_rotating_text(self, string, line=1, rate=0.5, timeout=10):
         # Double space notes end of rotation and increases readability
         line_overflow_buffer = string + '  '
+        run_time = 0
         while True:
             str_subset = '<' + line_overflow_buffer[:self.line_length-2] + '>'
             self.display_raw_string(str_subset, line)
             line_overflow_buffer = rotate_string(line_overflow_buffer)
             sleep(rate)
+            run_time += rate
 
     def new_text_scroll(self, string, line=1, begin='<', end='>'):
         self.scroll = ScrollingText(string, self.line_length, line, begin, end)
